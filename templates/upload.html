@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Photo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#upload">Upload Photo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#view">View Photos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#objects">Objects</a>
+            </li>
+        </ul>
+
+        <div class="tab-content mt-3">
+            <div id="upload" class="tab-pane fade show active">
+                <h2>Upload Photo</h2>
+                <form method="POST" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    <p>{{ form.photo.label }}</p>
+                    <p>{{ form.photo }}</p>
+                    <p><input type="submit" class="btn btn-primary" value="Upload"></p>
+                </form>
+            </div>
+            <div id="view" class="tab-pane fade">
+                <h2>View Photos</h2>
+                <div class="row">
+                    {% for filename in filenames %}
+                        <div class="col-md-4 mb-4">
+                            <img src="{{ url_for('uploaded_file', filename=filename) }}" class="img-fluid" \>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="objects" class="tab-pane fade">
+                <h2>Object Detection</h2>
+                <div class="row">
+                    {% for filename_2 in filenames_2 %}
+                        <div class="col-md-4 mb-4">
+                            <img src="{{ url_for('objects', filename_2=filename_2) }}" class="img-fluid" >
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>        
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
